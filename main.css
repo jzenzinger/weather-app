@@ -15,7 +15,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
 }
 
 header {
@@ -31,18 +31,21 @@ header input {
   padding: 10px 15px;
   border: none;
   outline: none;
-  background-color: rgba(145, 55, 3, 0.781);
+  background-color: rgb(221, 221, 221);
   border-radius: 16px 0px 16px 0px;
   border-bottom: 3px solid #1a1205;
   
-  color: #363636;
+  color: #272727;
   font-size: 20px;
   font-weight: 300;
-  transition: 0.2s ease-out;
+  transition: 0.3s ease-out;
 }
 
 header input:focus {
-  background-color: rgba(238, 238, 238, 0.795);
+  background-color: rgba(253, 252, 252, 0.795);
+}
+header input:hover {
+  background-color: rgba(253, 252, 252, 0.795);
 }
 
 main {
