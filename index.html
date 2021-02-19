@@ -10,7 +10,7 @@
 <body>
   <div class="app-wrap">
     <header>
-      <input type="text" autocomplete="off" class="search-box" placeholder="Search for a city..." />
+      <input type="text" autocomplete="off" class="search-box" placeholder="Search for a city..." onfocus="this.value=''"/>
     </header>
     <main>
       <section class="location">
@@ -21,7 +21,10 @@
         <div class="temp">5<span>°c</span></div>
         <div class="weather">Rain</div>
         <div class="hi-low">2°c | 6°c</div>
-        <div class="hi-low-text">Low High</div>
+        <div class="hi-low-text">
+          <label>Low </label>
+          <label>  High</label>
+        </div>
       </div>
     </main>
   </div>
