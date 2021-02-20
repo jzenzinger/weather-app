@@ -18,6 +18,58 @@ body {
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
 }
 
+.favourites {
+  display: flex;
+  flex-direction: row;
+  
+  padding-top: 70px;
+}
+.favouriteCities {
+  color: #FFF;
+}
+
+.favouriteStar {
+  padding-left: 15px;
+}
+#star-five {
+  position: relative;
+  
+  display: inline-block;
+  width: 0;
+  height: 0;
+  
+  margin-left: .9em;
+  margin-right: .9em;
+  margin-bottom: 1.2em;
+  
+  border-right:  .3em solid transparent;
+  border-bottom: .7em  solid #FC0;
+  border-left:   .3em solid transparent;
+
+  /* Controlls the size of the stars. */
+  font-size: 14px;
+} 
+#star-five:before, #star-five:after {
+  content: '';
+  
+  display: block;
+  width: 0;
+  height: 0;
+  
+  position: absolute;
+  top: .6em;
+  left: -1em;
+
+  border-right:  1em solid transparent;
+  border-bottom: .7em  solid #FC0;
+  border-left:   1em solid transparent;
+
+  transform: rotate(-35deg);
+}
+#star-five:after {  
+  transform: rotate(35deg);
+}
+
 header {
   display: flex;
   justify-content: center;
