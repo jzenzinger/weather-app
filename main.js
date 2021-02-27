@@ -19,6 +19,10 @@ function getResults (query) {
     }).then(displayResults);
 }
 
+//image defining for up-down icon in low-high weather stats
+var cursorImage = new Image(40,40);
+cursorImage.src = 'Icons/up-down.png';
+
 function displayResults (weather) {
   let city = document.querySelector('.location .city');
   city.innerText = `${weather.name}, ${weather.sys.country}`;
@@ -34,7 +38,7 @@ function displayResults (weather) {
   weather_el.innerText = weather.weather[0].main;
 
   let hilow = document.querySelector('.hi-low');
-  hilow.innerText = `${Math.round(weather.main.temp_min)}°c | ${Math.round(weather.main.temp_max)}°c`;
+  hilow.innerText = `${Math.round(weather.main.temp_min)}°c ${Math.round(weather.main.temp_max)}°c`;
 }
 
 function dateBuilder (d) {
