@@ -6,7 +6,7 @@
 
 body {
   font-family: 'montserrat', sans-serif;
-  background-image: url('bg.jpg');
+  background-image: url('bg2.jpg');
   background-size: cover;
   background-position: top center;
 }
@@ -15,13 +15,13 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.45));
 }
 
 .favourites {
   display: flex;
   flex-direction: row;
-  
+  border: none;
   padding-top: 70px;
 }
 .favouriteCities {
@@ -30,44 +30,14 @@ body {
 
 .favouriteStar {
   padding-left: 15px;
+  border: none;
 }
+
 #star-five {
-  position: relative;
+  display: flex;
+  background: transparent;
+  border: none;
   
-  display: inline-block;
-  width: 0;
-  height: 0;
-  
-  margin-left: .9em;
-  margin-right: .9em;
-  margin-bottom: 1.2em;
-  
-  border-right:  .3em solid transparent;
-  border-bottom: .7em  solid #FC0;
-  border-left:   .3em solid transparent;
-
-  /* Controlls the size of the stars. */
-  font-size: 14px;
-} 
-#star-five:before, #star-five:after {
-  content: '';
-  
-  display: block;
-  width: 0;
-  height: 0;
-  
-  position: absolute;
-  top: .6em;
-  left: -1em;
-
-  border-right:  1em solid transparent;
-  border-bottom: .7em  solid #FC0;
-  border-left:   1em solid transparent;
-
-  transform: rotate(-35deg);
-}
-#star-five:after {  
-  transform: rotate(35deg);
 }
 
 header {
@@ -83,11 +53,11 @@ header input {
   padding: 10px 15px;
   border: none;
   outline: none;
-  background-color: rgb(221, 221, 221);
-  border-radius: 16px 0px 16px 0px;
+  background-color: rgb(196, 196, 196);
+  border-radius: 8px 8px 8px 8px;
   border-bottom: 3px solid #1a1205;
   
-  color: #272727;
+  color: #1b1b1b;
   font-size: 20px;
   font-weight: 300;
   transition: 0.3s ease-out;
