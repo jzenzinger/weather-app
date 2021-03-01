@@ -19,9 +19,6 @@ function getResults (query) {
     }).then(displayResults);
 }
 
-//image defining for up-down icon in low-high weather stats
-var cursorImage = new Image(40,40);
-cursorImage.src = 'Icons/up-down.png';
 
 function displayResults (weather) {
   let city = document.querySelector('.location .city');
