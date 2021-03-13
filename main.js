@@ -2,6 +2,9 @@ const api = {
   key: "25e0086798dc59c52219880629e8f0c7",
   base: "https://api.openweathermap.org/data/2.5/"
 }
+//if searching city is valid, then return true and get result
+//if false, then return alert "City does not exist!"
+let searchIsValid = false;
 
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
@@ -10,13 +13,18 @@ function setQuery(evt) {
   if (evt.keyCode == 13) {
     getResults(searchbox.value);
   }
+  searchIsValid = false;  //reset searchbox validing condition
 }
 
 function getResults (query) {
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
     .then(weather => {
+      searchIsValid = true;
       return weather.json();
     }).then(displayResults);
+    if(searchIsValid == false) {
+      alert("Please enter existing city!");
+    }
 }
 
 
@@ -34,8 +42,11 @@ function displayResults (weather) {
   let weather_el = document.querySelector('.current .weather');
   weather_el.innerText = weather.weather[0].main;
 
-  let hilow = document.querySelector('.hi-low');
-  hilow.innerText = `${Math.round(weather.main.temp_min)}°c ${Math.round(weather.main.temp_max)}°c`;
+  let highTemp = document.querySelector('.highTemp');
+  highTemp.innerText = `${Math.round(weather.main.temp_max)}°c`;
+
+  let lowTemp = document.querySelector('.lowTemp');
+  lowTemp.innerText = `${Math.round(weather.main.temp_min)}°c`;
 }
 
 function dateBuilder (d) {

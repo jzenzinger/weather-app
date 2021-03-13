@@ -28,13 +28,12 @@ body {
 .favouriteCities {
   color: #FFF;
   padding-top: 5px;
-  padding-left: 25px;
+  padding-left: 20px;
 }
 
 .favouriteStar #star-five {
   background: transparent;
   border: none;
-  width: 18px;
 }
 
 #star-five img {
@@ -122,11 +121,15 @@ main {
 }
 
 .hi-low {
-  flex-direction: row;
+  white-space: nowrap;
+}
+
+.hi-low > div {
+  display: inline-block;
 }
 
 #up-down-narrows {
   position: relative;
-  background: transparent;
-  width: 20px;
+  fill: white;
+  width: 50px;
 }
