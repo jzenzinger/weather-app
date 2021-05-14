@@ -4,7 +4,7 @@ const api = {
 }
 //if searching city is valid, then return true and get result
 //if false, then return alert "City does not exist!"
-var searchIsValid = false;
+//var searchIsValid = false;
 
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
@@ -16,44 +16,40 @@ function setQuery(evt) {
   //searchIsValid = false;  //reset searchbox validing condition
 }
 
-function getResults (query) {
-  searchIsValid = false;  //reset searchbox validing condition
+function getResults(query) {
+  //searchIsValid = false;  //reset searchbox validing condition
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
     .then(weather => {
-      searchIsValid = true;
+      //searchIsValid = true;
       return weather.json();
     }).then(displayResults);
-    
+
 }
 
 
-function displayResults (weather) {
-  if(searchIsValid === false) {
-    alert("Search for existing city.");
-  }
-  else {
-    let city = document.querySelector('.location .city');
+function displayResults(weather) {
+  let city = document.querySelector('.location .city');
+  let now = new Date();
+  let date = document.querySelector('.location .date');
+  let temp = document.querySelector('.current .temp');
+  let weather_el = document.querySelector('.current .weather');
+  let highTemp = document.querySelector('.highTemp');
+  let lowTemp = document.querySelector('.lowTemp');
+
+  if (city, now, date, temp, weather_el, highTemp, lowTemp != null) {
     city.innerText = `${weather.name}, ${weather.sys.country}`;
-
-    let now = new Date();
-    let date = document.querySelector('.location .date');
     date.innerText = dateBuilder(now);
-
-    let temp = document.querySelector('.current .temp');
     temp.innerHTML = `${Math.round(weather.main.temp)}<span>°c</span>`;
-
-    let weather_el = document.querySelector('.current .weather');
     weather_el.innerText = weather.weather[0].main;
-
-    let highTemp = document.querySelector('.highTemp');
     highTemp.innerText = `${Math.round(weather.main.temp_max)}°c`;
-
-    let lowTemp = document.querySelector('.lowTemp');
     lowTemp.innerText = `${Math.round(weather.main.temp_min)}°c`;
   }
+  else {
+    alert("We couldn't find your city. Please enter city again.");
+  }
 }
 
-function dateBuilder (d) {
+function dateBuilder(d) {
   let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
