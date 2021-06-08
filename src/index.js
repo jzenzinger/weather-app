@@ -1,3 +1,5 @@
+import * as storage from './city';
+
 const api = {
   key: "25e0086798dc59c52219880629e8f0c7",
   base: "https://api.openweathermap.org/data/2.5/",
@@ -20,7 +22,6 @@ function setQuery(evt) {
 function getResults(query) {
   fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
     .then((weather) => {
-      //console.log(weather.status);
       //checking GET request status, >= 400, so display alert (client error) from server
       if (weather.status >= 400) {
         alert("City not found.");
