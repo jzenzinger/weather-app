@@ -40,6 +40,10 @@ function displayStorage(storKey, array) {
     else {
         document.getElementById("favourites").style.display = "none";
     }
+
+    //Dořešit mazání prvků ze storage a pole, asi podle toho id city
+    //Problém aplikace s inputButton.onclick event, assigment to rvalue ???
+    // Dořešit zobrazování hvězdy u každého města
 }
 
 function displayItem(array) {
