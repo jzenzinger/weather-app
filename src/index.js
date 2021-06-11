@@ -15,6 +15,7 @@ function setQuery(evt) {
     } 
     else {
       getResults(searchbox.value);
+      storage.favouritesEvent();
     }
   }
 }
@@ -39,6 +40,7 @@ function displayResults(weather) {
   let weather_el = document.querySelector(".current .weather");
   let highTemp = document.querySelector(".highTemp");
   let lowTemp = document.querySelector(".lowTemp");
+  let narrows = document.getElementById('up-down-narrows');
 
   city.innerText = `${weather.name}, ${weather.sys.country}`;
   date.innerText = dateBuilder(currentDate);
@@ -46,6 +48,7 @@ function displayResults(weather) {
   weather_el.innerText = weather.weather[0].main;
   highTemp.innerText = `${Math.round(weather.main.temp_max)}°c`;
   lowTemp.innerText = `${Math.round(weather.main.temp_min)}°c`;
+  narrows.hidden = false;
 }
 
 function dateBuilder(d) {

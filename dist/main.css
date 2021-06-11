@@ -74,6 +74,10 @@ header input {
   background: transparent;
 }
 
+#inputStarBtn:active, #star-five:active {
+  transform: translateY(2px);
+}
+
 header input:focus {
   background-color: rgba(253, 252, 252, 0.795);
 }
