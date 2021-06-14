@@ -1,45 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Weather app</title>
-  <link rel="icon" type=image/png href="../Icons/wheather_header.png">
-  <link rel="stylesheet" href="main.css" />
-  <script src="main.js" defer></script>
-</head>
-<body>
-  <div class="app-wrap">
-    <header>
-      <button id="inputStarBtn"><img src="../Icons/star-transparent.png"></button>
-      <input type="text" autocomplete="off" class="search-box" id="searchInput" placeholder="Search for a city..." onfocus="this.value=''"/>
-    </header>
-    <main>
-      <section class="location">
-        <div class="city">Nothing to see here...yet!</div>
-        <div class="date"></div>
-      </section>
-      <div class="current">
-        <div class="temp"><span></span></div>
-        <div class="weather"></div>
-        <div class="hi-low">
-          <div class="lowTemp">
-          </div>
-          <img id="up-down-narrows" src="../Icons/up-down-arrow.svg" hidden>
-          <div class="highTemp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Weather app</title>
+    <link rel="icon" type=image/png href="../Icons/wheather_header.png">
+    <link rel="stylesheet" href="main.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <div class="app-wrap">
+      <header>
+        <button id="inputStarBtn">
+          <img src="../Icons/star-transparent.png" />
+        </button>
+        <input
+          type="text"
+          autocomplete="off"
+          class="search-box"
+          id="searchInput"
+          placeholder="Search for a city..."
+          onfocus="this.value=''"
+        />
+      </header>
+      <main>
+        <section class="location">
+          <div class="city">Nothing to see here...yet!</div>
+          <div class="date"></div>
+        </section>
+        <div class="current">
+          <div class="temp"><span></span></div>
+          <div class="weather"></div>
+          <div class="hi-low">
+            <div class="lowTemp"></div>
+            <img id="up-down-narrows" src="../Icons/up-down-arrow.svg" hidden />
+            <div class="highTemp"></div>
           </div>
         </div>
-      </div>
-      <div class="favourites" id="favourites" style="display: none;">
-        <!-- <div class="favouriteStar">
-          <button id="star-five"><img src="../Icons/star-fill.png"></button>
-       </div> -->
-        <div class="favouriteCities">
-          Favourite City...
+        <div class="favourites" id="favourites" style="display: none">
+          <div class="favouriteCities"></div>
         </div>
-      </div>
-    </main>
-  </div>
-</body>
+      </main>
+    </div>
+    <script>
+      function initMap() {
+        const input =  document.getElementById("searchInput");
+        const autoCompleteValue = new google.maps.places.Autocomplete(input);
+      }
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcj9Wy9i2HGXAp1nSmJvAbvFHf8JippHg&libraries=places&callback=initMap"
+    ></script>
+  </body>
 </html>
