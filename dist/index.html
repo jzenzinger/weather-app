@@ -13,7 +13,7 @@
     <div class="app-wrap">
       <header>
         <button id="inputStarBtn">
-          <img src="./Icons/star-transparent.png" />
+          <img src="./Icons/star-transparent.png" id="inputBtnImg" />
         </button>
         <input
           type="text"
@@ -21,35 +21,44 @@
           class="search-box"
           id="searchInput"
           placeholder="Search for a city..."
-          onfocus="this.value=''"
         />
       </header>
-      <main>
-        <section class="location">
-          <div class="city">Nothing to see here...yet!</div>
-          <div class="date"></div>
-        </section>
-        <div class="current">
-          <div class="temp"><span></span></div>
-          <div class="weather"></div>
-          <div class="hi-low">
-            <div class="lowTemp"></div>
-            <img id="up-down-narrows" src="./Icons/up-down-arrow.svg" hidden />
-            <div class="highTemp"></div>
+      <div class="body-wrapper">
+        <main>
+          <section class="location">
+            <div class="city">Nothing to see here...yet!</div>
+            <div class="date"></div>
+          </section>
+          <div class="current">
+            <div class="temp"><span></span></div>
+            <div class="weather"></div>
+            <div class="hi-low">
+              <div class="lowTemp"></div>
+              <img
+                id="up-down-narrows"
+                src="./Icons/up-down-arrow.svg"
+                hidden
+              />
+              <div class="highTemp"></div>
+            </div>
           </div>
-        </div>
+        </main>
         <div class="favourites" id="favourites" style="display: none">
           <div class="favouriteCities"></div>
         </div>
-      </main>
+      </div>
     </div>
     <script>
       function initMap() {
-        const input =  document.getElementById("searchInput");
-        const autoCompleteValue = new google.maps.places.Autocomplete(input);
+        const searchInput = document.getElementById("searchInput");
+        const autoCompleteValue = new google.maps.places.Autocomplete(
+          searchInput
+        );
       }
     </script>
-    <script async defer
+    <script
+      async
+      defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcj9Wy9i2HGXAp1nSmJvAbvFHf8JippHg&libraries=places&callback=initMap"
     ></script>
   </body>

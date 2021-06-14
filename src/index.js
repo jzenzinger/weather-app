@@ -9,6 +9,9 @@ const api = {
 
 const searchbox = document.querySelector(".search-box");
 searchbox.addEventListener("keypress", setQuery);
+window.onload = storage.localStorageCheck();  //callblack function to display localStorage
+
+
 
 function setQuery(evt) {
   if (evt.keyCode == 13) {
@@ -17,7 +20,8 @@ function setQuery(evt) {
     } 
     else {
       getResults(searchbox.value);
-      storage.favouritesEvent();
+      storage.favouritesEvent(searchbox);
+      storage.inputExistCheck(searchbox.value);
     }
   }
 }
@@ -85,3 +89,6 @@ function dateBuilder(d) {
 
   return `${day}, ${date} ${month} ${year}`;
 }
+
+
+export {getResults};

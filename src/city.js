@@ -1,31 +1,112 @@
-var inputButton = document.getElementById("inputStarBtn");
-var input = document.getElementById("searchInput").value;
-var displayPlace = document.querySelector(".favouriteCities");
+import * as server from "./index";
 
 const LOCAL_STORAGE_KEY = "cities";
 let cities = [];
 
-function favouritesEvent() {
+var inputButton = document.getElementById("inputStarBtn");
+var inputButtonImg = document.getElementById("inputBtnImg");
+var input = document.getElementById("searchInput");
+var displayPlace = document.querySelector(".favouriteCities");
+
+
+function favouritesEvent(value) {
   inputButton.onclick = function () {
-    document.getElementById("favourites").style.display = "block";
-    saveItem(input, cities);
-    displayStorage(LOCAL_STORAGE_KEY, cities);
-    displayItem(cities);
-    styleBtn();
+    if (cities.includes(value.value)) {
+      deleteItem(findItemArray(cities, value.value), cities);
+      displayStorage(LOCAL_STORAGE_KEY, cities);
+      inputButtonImg.src = "../dist/Icons/star-transparent.png";
+      return;
+    }
+    if (checkValue(value)) {
+      document.getElementById("favourites").style.display = "block";
+      saveItem(value.value, cities);
+      displayStorage(LOCAL_STORAGE_KEY, cities);
+      styleBtn();
+    }
   };
 }
 
-function styleBtn() {
-  if (inputButton.src == "./Icons/star-fill.png") {
-    inputButton.src = "./Icons/star-transparent.png";
+
+const favCityStar = document.getElementById("star-five");
+//not working cause element is null...fuck
+//   favCityStar.addEventListener("click", () => {
+//     deleteItem(findItemByID(cities, favCityStar.className), cities);
+//     document.getElementsByClassName(favCityStar.className).remove();
+//     displayStorage(LOCAL_STORAGE_KEY, cities);
+//     // favCityStar.src = "../dist/Icons/star-transparent.png";
+//   });
+
+
+
+function localStorageCheck() {
+  if (localStorage.length != 0) {
+    document.getElementById("favourites").style.display = "block";
+    displayStorage(LOCAL_STORAGE_KEY, cities);
   } else {
-    inputButton.src = "./Icons/star-fill.png";
+    document.getElementById("favourites").style.display = "none";
+  }
+}
+
+function checkValue(value) {
+  if (value.value.length === 0 || value.value === "") {
+    alert("Enter city for searching");
+    inputButtonImg.src = "../dist/Icons/star-transparent.png";
+    return false;
+  }
+  return true;
+}
+
+function inputExistCheck(input) {
+  if (cities.includes(input)) {
+    inputButtonImg.src = "../dist/Icons/star-fill.png";
+  } else {
+    inputButtonImg.src = "../dist/Icons/star-transparent.png";
+  }
+}
+
+function styleBtn() {
+  if (inputButtonImg.src === "../dist/Icons/star-fill.png") {
+    inputButtonImg.src = "../dist/Icons/star-transparent.png";
+  } else {
+    inputButtonImg.src = "../dist/Icons/star-fill.png";
   }
 }
 
 function saveItem(item, array) {
   array.push(item);
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(array));
+}
+
+function deleteItem(current, array) {
+  array.splice(current, 1);
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(array));
+}
+
+function findItemArray(array, value) {
+  if (array.length === 0 || array === null) {
+    return;
+  }
+  let tmp = 0;
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] === value) {
+      return tmp;
+    }
+    tmp++;
+  }
+}
+
+function findItemByID(array, value) {
+  let tmp = 0;
+  for (var i = 0; i < array.length; i++) {
+    if (`city${i}` === value) {
+      return tmp;
+    }
+    tmp++;
+  }
+}
+
+function removeItemByID(value) {
+  document.getElementById(value).remove();
 }
 
 function displayStorage(storKey, array) {
@@ -38,8 +119,6 @@ function displayStorage(storKey, array) {
   }
 
   //Dořešit mazání prvků ze storage a pole, asi podle toho id city
-  // Dořešit zobrazování hvězdy u každého města
-  // hvezda se nezobrazuje a nemeni spravne
 }
 
 function displayItem(array) {
@@ -47,10 +126,18 @@ function displayItem(array) {
   let items = "";
 
   for (var i = 0; i < array.length; i++) {
-    items += `<button id="star-five" name="city${i}"><img src="./Icons/star-fill.png"></button>
-                    <input type="button" id=city${i} onclick="favouritesEvent()" value="${array[i]}"></input><br>`;
+    items += `<button id="star-five" class="city${i}"><img src="./Icons/star-fill.png"></button>
+                    <input type="button" id=city${i} value="${array[i]}" onclick="getResults(this.value)" class="favCityValue"></input><br>`;
   }
   displayPlace.innerHTML = items;
 }
 
-export { favouritesEvent, saveItem, displayItem, displayStorage };
+export {
+  favouritesEvent,
+  saveItem,
+  displayItem,
+  displayStorage,
+  checkValue,
+  inputExistCheck,
+  localStorageCheck,
+};
