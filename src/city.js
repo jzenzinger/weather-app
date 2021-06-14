@@ -16,10 +16,10 @@ function favouritesEvent() {
 }
 
 function styleBtn() {
-  if (inputButton.src == "../Icons/star-fill.png") {
-    inputButton.src = "../Icons/star-transparent.png";
+  if (inputButton.src == "./Icons/star-fill.png") {
+    inputButton.src = "./Icons/star-transparent.png";
   } else {
-    inputButton.src = "../Icons/star-fill.png";
+    inputButton.src = "./Icons/star-fill.png";
   }
 }
 
@@ -47,7 +47,7 @@ function displayItem(array) {
   let items = "";
 
   for (var i = 0; i < array.length; i++) {
-    items += `<button id="star-five" name="city${i}"><img src="../Icons/star-fill.png"></button>
+    items += `<button id="star-five" name="city${i}"><img src="./Icons/star-fill.png"></button>
                     <input type="button" id=city${i} onclick="favouritesEvent()" value="${array[i]}"></input><br>`;
   }
   displayPlace.innerHTML = items;
