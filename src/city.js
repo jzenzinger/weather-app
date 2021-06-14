@@ -6,7 +6,7 @@ const LOCAL_STORAGE_KEY = 'cities';
 let cities = [];
 
 function favouritesEvent() {
-    inputButton.onclick() = function() {
+    inputButton.onclick = function() {
         document.getElementById("favourites").style.display = "block";
         saveItem(input, cities);
         displayStorage(LOCAL_STORAGE_KEY, cities);
@@ -16,7 +16,7 @@ function favouritesEvent() {
 }
 
 function styleBtn() {
-    inputButton.onclick() = function() {
+    inputButton.onclick = function() {
         if(inputButton.src === "../Icons/star-fill.png") {
             inputButton.src = "../Icons/star-transparent.png"
         }
@@ -42,19 +42,18 @@ function displayStorage(storKey, array) {
     }
 
     //Dořešit mazání prvků ze storage a pole, asi podle toho id city
-    //Problém aplikace s inputButton.onclick event, assigment to rvalue ???
     // Dořešit zobrazování hvězdy u každého města
 }
 
 function displayItem(array) {
     console.log("displaying..");
-    items = "";
+    let items = "";
 
-    for (var i = 0; i < fav.length; i++) {
-      
-        string += `<input type="button" id=city${i} onclick="favouritesEvent(input)" value="${array[i]}"></input><br>`;
+    for (var i = 0; i < array.length; i++) {
+        items += `<button id="star-five" name="city${i}"><img src="../Icons/star-fill.png"></button>
+                    <input type="button" id=city${i} onclick="favouritesEvent()" value="${array[i]}"></input><br>`;
       }
-      document.getElementById('favourites').innerHTML = items;
+      displayPlace.innerHTML = items;
 }
 
 
