@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
+
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/jzenzinger/weather-app/issues"
   },
-  "homepage": "https://github.com/jzenzinger/weather-app#readme",
+  "homepage": "https://github.com/jzenzinger/weather-app",
   "devDependencies": {
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.2"

@@ -5,6 +5,8 @@ const api = {
   base: "https://api.openweathermap.org/data/2.5/",
 };
 
+//const GOOGLE_API_KEY = 'AIzaSyCcj9Wy9i2HGXAp1nSmJvAbvFHf8JippHg';
+
 const searchbox = document.querySelector(".search-box");
 searchbox.addEventListener("keypress", setQuery);
 
