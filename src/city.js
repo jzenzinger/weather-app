@@ -2,6 +2,7 @@ import * as server from "./index";
 
 const LOCAL_STORAGE_KEY = "cities";
 let cities = [];
+cities = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
 
 var inputButton = document.getElementById("inputStarBtn");
 var inputButtonImg = document.getElementById("inputBtnImg");
@@ -25,16 +26,14 @@ function favouritesEvent(value) {
   };
 }
 
-const check = localStorageCheck();
-if (check === true) {
-  const favCityStar = document.getElementById("star-five");
-  //not working cause element is null...
-    favCityStar.onclick = function() {
-      deleteItem(findItemByID(cities, favCityStar.className), cities);
-      document.getElementsByClassName(favCityStar.className).remove();
-      displayStorage(LOCAL_STORAGE_KEY, cities);
+  //not working cause element is null... 
+  const favCityValue = document.getElementsByClassName("favCityValue");
+    favCityValue.onclick = function() {
+      inputButtonImg.src = "../dist/Icons/star-fill.png";
+      input.innerHTML = favCityValue.value;
+      server.getResults(favCityValue.value);
     }
-}
+ 
 
 function localStorageCheck() {
   if (localStorage.length != 0) {
@@ -94,15 +93,15 @@ function findItemArray(array, value) {
   }
 }
 
-function findItemByID(array, value) {
-  let tmp = 0;
-  for (var i = 0; i < array.length; i++) {
-    if (`city${i}` === value) {
-      return tmp;
-    }
-    tmp++;
-  }
-}
+// function findItemByID(array, value) {
+//   let tmp = 0;
+//   for (var i = 0; i < array.length; i++) {
+//     if (`city${i}` === value) {
+//       return tmp;
+//     }
+//     tmp++;
+//   }
+// }
 
 function displayStorage(storKey, array) {
   array = JSON.parse(localStorage.getItem(storKey));
@@ -112,17 +111,19 @@ function displayStorage(storKey, array) {
   } else {
     document.getElementById("favourites").style.display = "none";
   }
-
-  //Dořešit mazání prvků ze storage a pole, asi podle toho id city
 }
 
 function displayItem(array) {
-  console.log("displaying..");
+  console.log("displaying localStorage");
   let items = "";
 
   for (var i = 0; i < array.length; i++) {
-    items += `<button id="star-five" class="city${i}"><img src="./Icons/star-fill.png"></button>
-                    <input type="button" id=city${i} value="${array[i]}" class="favCityValue"></input><br>`;
+    items += `<button id="city${i}" 
+                        class="favCityValue" 
+                        onclick="server.seeCityInfo(this.value);" 
+                        value="${array[i]}">
+                            ${array[i]}
+                        </button>`;
   }
   displayPlace.innerHTML = items;
 }

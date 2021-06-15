@@ -9,6 +9,7 @@ const api = {
 
 const searchbox = document.querySelector(".search-box");
 searchbox.addEventListener("keypress", setQuery);
+searchbox.addEventListener("click", setQuery);
 window.onload = storage.localStorageCheck();  //callblack function to display localStorage
 
 
@@ -19,9 +20,12 @@ function setQuery(evt) {
       alert("Enter city for searching");
     } 
     else {
+      //const result = getResults(searchbox.value);
       getResults(searchbox.value);
-      storage.favouritesEvent(searchbox);
-      storage.inputExistCheck(searchbox.value);
+      //if(result != null) {
+        storage.favouritesEvent(searchbox);
+        storage.inputExistCheck(searchbox.value);
+      //}
     }
   }
 }
