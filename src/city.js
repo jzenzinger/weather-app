@@ -8,7 +8,6 @@ var inputButtonImg = document.getElementById("inputBtnImg");
 var input = document.getElementById("searchInput");
 var displayPlace = document.querySelector(".favouriteCities");
 
-
 function favouritesEvent(value) {
   inputButton.onclick = function () {
     if (cities.includes(value.value)) {
@@ -26,22 +25,22 @@ function favouritesEvent(value) {
   };
 }
 
-
-const favCityStar = document.getElementById("star-five");
-//not working cause element is null...fuck
-//   favCityStar.addEventListener("click", () => {
-//     deleteItem(findItemByID(cities, favCityStar.className), cities);
-//     document.getElementsByClassName(favCityStar.className).remove();
-//     displayStorage(LOCAL_STORAGE_KEY, cities);
-//     // favCityStar.src = "../dist/Icons/star-transparent.png";
-//   });
-
-
+const check = localStorageCheck();
+if (check === true) {
+  const favCityStar = document.getElementById("star-five");
+  //not working cause element is null...
+    favCityStar.onclick = function() {
+      deleteItem(findItemByID(cities, favCityStar.className), cities);
+      document.getElementsByClassName(favCityStar.className).remove();
+      displayStorage(LOCAL_STORAGE_KEY, cities);
+    }
+}
 
 function localStorageCheck() {
   if (localStorage.length != 0) {
     document.getElementById("favourites").style.display = "block";
     displayStorage(LOCAL_STORAGE_KEY, cities);
+    return true;
   } else {
     document.getElementById("favourites").style.display = "none";
   }
@@ -105,10 +104,6 @@ function findItemByID(array, value) {
   }
 }
 
-function removeItemByID(value) {
-  document.getElementById(value).remove();
-}
-
 function displayStorage(storKey, array) {
   array = JSON.parse(localStorage.getItem(storKey));
 
@@ -127,7 +122,7 @@ function displayItem(array) {
 
   for (var i = 0; i < array.length; i++) {
     items += `<button id="star-five" class="city${i}"><img src="./Icons/star-fill.png"></button>
-                    <input type="button" id=city${i} value="${array[i]}" onclick="getResults(this.value)" class="favCityValue"></input><br>`;
+                    <input type="button" id=city${i} value="${array[i]}" class="favCityValue"></input><br>`;
   }
   displayPlace.innerHTML = items;
 }
