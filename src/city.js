@@ -4,6 +4,10 @@ const LOCAL_STORAGE_KEY = "cities";
 let cities = [];    //array to store cities to localStorage saving
 cities = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
 
+if (cities === null) {
+    cities = [];
+}
+
 var inputButton = document.getElementById("inputStarBtn");
 var inputButtonImg = document.getElementById("inputBtnImg");
 var input = document.getElementById("searchInput");
@@ -11,8 +15,8 @@ var displayPlace = document.querySelector(".favouriteCities");
 
 function favouritesEvent() {
     inputButton.onclick = function () {
-        if (cities !== null) {
-            if (cities.includes(input.value) || cities != null) {
+        if (cities !== null && inputButtonImg.src === "../dist/Icons/star-fill.png") {
+            if (cities.includes(input.value)) {
                 deleteItem(findItemArray(cities, input.value), cities);
                 displayStorage(LOCAL_STORAGE_KEY, cities);
                 inputButtonImg.src = "../dist/Icons/star-transparent.png";
@@ -21,8 +25,8 @@ function favouritesEvent() {
         }
         if (checkValue(input)) {
             document.getElementById("favourites").style.display = "block";
-            console.log(input.value);
-            console.log(Array.isArray(cities));
+            // console.log(input.value);
+            // console.log(Array.isArray(cities));
             saveItem(input, cities);
             displayStorage(LOCAL_STORAGE_KEY, cities);
             styleBtn();
@@ -44,6 +48,12 @@ function localStorageCheck() {
 function checkValue(item) {
     if (item.value.length === 0 || item.value === "") {
         alert("Enter city for searching");
+        inputButtonImg.src = "../dist/Icons/star-transparent.png";
+        return false;
+    }
+    if (cities.includes(item.value)) {
+        deleteItem(findItemArray(cities, input.value), cities);
+        displayStorage(LOCAL_STORAGE_KEY, cities);
         inputButtonImg.src = "../dist/Icons/star-transparent.png";
         return false;
     }
@@ -70,15 +80,17 @@ function styleBtn() {
 }
 
 function saveItem(item, array) {
-    if(item.value !== null || item.value !== '' || array !== null) {
+    //array = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (item.value !== null || item.value !== '') {
         array.push(item.value);
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(array));
-    } 
+    }
 }
 
 function deleteItem(current, array) {
     array.splice(current, 1);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(array));
+    let unique = [...new Set(array)];
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(unique));
 }
 
 function findItemArray(array, value) {
@@ -96,9 +108,10 @@ function findItemArray(array, value) {
 
 function displayStorage(storKey, array) {
     array = JSON.parse(localStorage.getItem(storKey));
+    let unique = [...new Set(array)];
 
-    if (array.length !==0) {
-        displayItem(array);
+    if (unique.length !== 0) {
+        displayItem(unique);
     } else {
         document.getElementById("favourites").style.display = "none";
     }
@@ -106,17 +119,35 @@ function displayStorage(storKey, array) {
 
 function displayItem(array) {
     console.log("displaying localStorage");
-    let items = "";
+    //let items = "";
+    displayPlace.innerHTML = "";
 
     for (var i = 0; i < array.length; i++) {
-        items += `<button id="city${i}" 
+        let items = `<button id="city${i}" 
                         class="favCityValue" 
-                        onClick="${server.getResults(this.value)}" 
                         value="${array[i]}">
                             ${array[i]}
                 </button>`;
+
+        displayPlace.innerHTML += items;
+        document.getElementById(`city${i}`).onclick = addListener(array[i]);
+        //addListener(`city${i}`, array[i]);
     }
-    displayPlace.innerHTML = items;
+    //displayPlace.innerHTML = items;
+    //onclick="${await server.getResults(array[i])}"    // line 123
+}
+
+function addListener(/*id,*/ value) {
+    return function() {
+        server.getResults(value);
+        styleBtn();
+        input.value = value;
+    }
+    // document.getElementById(id).addEventListener("click", function() {
+    //     server.getResults(value);
+    //     styleBtn();
+    //     input.value = value;
+    // }
 }
 
 export {
