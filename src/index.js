@@ -20,12 +20,9 @@ function setQuery(evt) {
       alert("Enter city for searching");
     } 
     else {
-      //const result = getResults(searchbox.value);
       getResults(searchbox.value);
-      //if(result != null) {
-        storage.favouritesEvent(searchbox);
+        storage.favouritesEvent();
         storage.inputExistCheck(searchbox.value);
-      //}
     }
   }
 }

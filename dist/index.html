@@ -49,16 +49,13 @@
             <input type="text" class="favCityValue" value="Favourite cities">
           </div>
           <div class="favouriteCities"></div>
-          <!-- <button id="city${i}" class="favCityValue">`${city[i]}`</button> -->
         </div>
       </div>
     </div>
     <script>
       function initMap() {
         const searchInput = document.getElementById("searchInput");
-        const autoCompleteValue = new google.maps.places.Autocomplete(
-          searchInput
-        );
+        const autoCompleteValue = new google.maps.places.Autocomplete(searchInput);
       }
     </script>
     <script
