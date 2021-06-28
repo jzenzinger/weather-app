@@ -1,23 +1,25 @@
 import * as server from "./index";
 
 const LOCAL_STORAGE_KEY = "cities";
-let cities = [];    //array to store cities to localStorage saving
-cities = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-
-if (cities === null) {
-    cities = [];
-}
-
 var inputButton = document.getElementById("inputStarBtn");
 var inputButtonImg = document.getElementById("inputBtnImg");
 var input = document.getElementById("searchInput");
 var displayPlace = document.querySelector(".favouriteCities");
 
+
+//array to store cities to localStorage saving
+let cities = [];    
+cities = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+if (cities === null) {
+    cities = [];
+}
+
+
 function favouritesEvent() {
     inputButton.onclick = function () {
         if (cities !== null && inputButtonImg.src === "../dist/Icons/star-fill.png") {
             if (cities.includes(input.value)) {
-                deleteItem(findItemArray(cities, input.value), cities);
+                deleteItem(findItemInArray(cities, input.value), cities);
                 displayStorage(LOCAL_STORAGE_KEY, cities);
                 inputButtonImg.src = "../dist/Icons/star-transparent.png";
                 return;
@@ -52,7 +54,7 @@ function checkValue(item) {
         return false;
     }
     if (cities.includes(item.value)) {
-        deleteItem(findItemArray(cities, input.value), cities);
+        deleteItem(findItemInArray(cities, input.value), cities);
         displayStorage(LOCAL_STORAGE_KEY, cities);
         inputButtonImg.src = "../dist/Icons/star-transparent.png";
         return false;
@@ -93,7 +95,7 @@ function deleteItem(current, array) {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(unique));
 }
 
-function findItemArray(array, value) {
+function findItemInArray(array, value) {
     if (array.length === 0 || array === null) {
         return;
     }
@@ -118,26 +120,33 @@ function displayStorage(storKey, array) {
 }
 
 function displayItem(array) {
-    console.log("displaying localStorage");
+    //console.log("displaying localStorage");
     //let items = "";
     displayPlace.innerHTML = "";
 
-    for (var i = 0; i < array.length; i++) {
-        let items = `<button id="city${i}" 
-                        class="favCityValue" 
-                        value="${array[i]}">
-                            ${array[i]}
-                </button>`;
+    for (let i = 0; i < array.length; i++) {
+        // let items = `<button id="city${i}" 
+        //                 class="favCityValue" 
+        //                 value="${array[i]}">
+        //                     ${array[i]}
+        //         </button>`;
+        const button = document.createElement("button");
+        button.id = "city" + i;
+        button.className = "favCityValue";
+        button.innerHTML = array[i];
+        button.setAttribute('index', i);
+        button.addEventListener("click", handleCityClick(array[i]));
+        displayPlace.appendChild(button);
 
-        displayPlace.innerHTML += items;
-        document.getElementById(`city${i}`).onclick = addListener(array[i]);
-        //addListener(`city${i}`, array[i]);
+        //displayPlace.innerHTML += items;
+        //document.getElementById(`city${i}`).onclick = handleCityClick(array[i]);
+        // handleCityClick(`city${i}`, array[i]);
     }
     //displayPlace.innerHTML = items;
     //onclick="${await server.getResults(array[i])}"    // line 123
 }
 
-function addListener(/*id,*/ value) {
+function handleCityClick(/*id,*/ value) {
     return function() {
         server.getResults(value);
         styleBtn();
@@ -147,7 +156,7 @@ function addListener(/*id,*/ value) {
     //     server.getResults(value);
     //     styleBtn();
     //     input.value = value;
-    // }
+    // });
 }
 
 export {
