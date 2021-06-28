@@ -17,18 +17,17 @@ if (cities === null) {
 
 function favouritesEvent() {
     inputButton.onclick = function () {
-        if (cities !== null && inputButtonImg.src === "../dist/Icons/star-fill.png") {
+        if (cities !== null && inputButtonImg.src === "./Icons/star-fill.png") {
             if (cities.includes(input.value)) {
                 deleteItem(findItemInArray(cities, input.value), cities);
                 displayStorage(LOCAL_STORAGE_KEY, cities);
-                inputButtonImg.src = "../dist/Icons/star-transparent.png";
+                //inputButtonImg.src = "../dist/Icons/star-transparent.png";
+                inputButtonImg.src = "./Icons/star-transparent.png";
                 return;
             }
         }
         if (checkValue(input)) {
             document.getElementById("favourites").style.display = "block";
-            // console.log(input.value);
-            // console.log(Array.isArray(cities));
             saveItem(input, cities);
             displayStorage(LOCAL_STORAGE_KEY, cities);
             styleBtn();
@@ -50,13 +49,15 @@ function localStorageCheck() {
 function checkValue(item) {
     if (item.value.length === 0 || item.value === "") {
         alert("Enter city for searching");
-        inputButtonImg.src = "../dist/Icons/star-transparent.png";
+        // inputButtonImg.src = "../dist/Icons/star-transparent.png";
+        inputButtonImg.src = "./Icons/star-transparent.png";
         return false;
     }
     if (cities.includes(item.value)) {
         deleteItem(findItemInArray(cities, input.value), cities);
         displayStorage(LOCAL_STORAGE_KEY, cities);
-        inputButtonImg.src = "../dist/Icons/star-transparent.png";
+        //inputButtonImg.src = "../dist/Icons/star-transparent.png";
+        inputButtonImg.src = "./Icons/star-transparent.png";
         return false;
     }
     return true;
@@ -67,17 +68,22 @@ function inputExistCheck(input) {
         return;
     }
     if (cities.includes(input)) {
-        inputButtonImg.src = "../dist/Icons/star-fill.png";
+        // inputButtonImg.src = "../dist/Icons/star-fill.png";
+        inputButtonImg.src = "./Icons/star-fill.png";
     } else {
-        inputButtonImg.src = "../dist/Icons/star-transparent.png";
+        inputButtonImg.src = "./Icons/star-transparent.png";
+        // inputButtonImg.src = "../dist/Icons/star-transparent.png";
     }
 }
 
 function styleBtn() {
-    if (inputButtonImg.src === "../dist/Icons/star-fill.png") {
-        inputButtonImg.src = "../dist/Icons/star-transparent.png";
+    //inputButtonImg.src === "../dist/Icons/star-fill.png"
+    if (inputButtonImg.src === "./Icons/star-fill.png") {
+        //inputButtonImg.src = "../dist/Icons/star-transparent.png";
+        inputButtonImg.src = "./Icons/star-transparent.png";
     } else {
-        inputButtonImg.src = "../dist/Icons/star-fill.png";
+        //inputButtonImg.src === "../dist/Icons/star-fill.png"
+        inputButtonImg.src = "./Icons/star-fill.png";
     }
 }
 
