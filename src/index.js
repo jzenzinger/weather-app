@@ -1,11 +1,11 @@
 import * as storage from './city';
 
 const api = {
-  key: "25e0086798dc59c52219880629e8f0c7",
+  key: "DEMO_KEY",
   base: "https://api.openweathermap.org/data/2.5/",
 };
 
-//const GOOGLE_API_KEY = 'AIzaSyCcj9Wy9i2HGXAp1nSmJvAbvFHf8JippHg';
+//const GOOGLE_API_KEY = 'DEMO_KEY';
 
 const searchbox = document.querySelector(".search-box");
 searchbox.addEventListener("keypress", setQuery);
